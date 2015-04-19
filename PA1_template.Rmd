@@ -15,7 +15,7 @@ options(scipen = 999)
 ```
 ### 1. Loading and preprocessing the data
 
-The first step was to read the file **activity.zip** and to save it in the variable *dados*. The ZIP file must be placed in the same folder of this Markdown document. The variable *date* was converted to a **date** class.
+The first step was to read the file **activity.zip** and to save it in the object *dados*. The ZIP file must be placed in the same folder of this Markdown document in order to run the embedded code. The variable **date** was converted to a *date* class.
 
 ```{r echo=TRUE, warning=FALSE}
 if (!file.exists("activity.csv")) {
@@ -29,7 +29,7 @@ str(dados)
   
 ### 2. What is mean total number of steps taken per day?  
 
-The code below creates a factor variable named **dia** that will be used to split the dataset. The *tapply* sums the number of steps per day. The average is calculated and stored in the variable **mediaPassoDia**. 
+The code below created a factor variable named **dia** that was used to split the dataset. The *tapply* summed the number of steps per day. The average was calculated and stored in the variable **mediaPassoDia**. The median was stored in the variable **medianaPassoDia**.
 
 ```{r echo=TRUE, fig.height=4, warning=FALSE}
 dados <- transform(dados, dia = as.factor(dados$date))
@@ -41,11 +41,11 @@ x <- as.Date(names(totalPassoDia))
 plot(x, y, type="h", xlab="Day", ylab="Total steps per day")
 ```
 
-So, the average number of steps per day is **`r round(mediaPassoDia)`**. The median is **`r round(medianaPassoDia)`**. The missing data was excluded from the calculation.  
+So, the average number of steps per day was **`r round(mediaPassoDia)`**. The median was **`r round(medianaPassoDia)`**. The missing data was excluded from the calculation.  
 
 ### 3. What is the average daily activity pattern?  
 
-The code creates a factor variable named **tempo** that will be used to split the dataset. The *tapply* averages the number of steps per interval for all measured days. The average is stored in the variable **mediaPassoTempo**.  
+The code created a factor variable named **tempo** that was used to split the dataset. The *tapply* averaged the number of steps per interval for all measured days. The average was stored in the variable **mediaPassoTempo**.  
 
 ```{r echo=TRUE, fig.height=4, warning=FALSE}
 dados <- transform(dados, tempo = as.factor(dados$interval))
@@ -55,13 +55,13 @@ x <- names(mediaPassoTempo)
 plot(x, y, type = "l", xlab = "Interval", ylab = "Average steps per 5 min interval")
 ```
 
-The highest average steps occurs in the **`r names(mediaPassoTempo[grep(max(mediaPassoTempo), mediaPassoTempo)])`** interval. The missing data was excluded from the average calculation.
+The highest average steps occurred in the **`r names(mediaPassoTempo[grep(max(mediaPassoTempo), mediaPassoTempo)])`** interval. The missing data was excluded from the average calculation.
 
 ## Imputing missing values  
 
-- The total number of missing values is **`r sum(is.na(dados$steps))`**.  
+- The total number of missing values was **`r sum(is.na(dados$steps))`**.  
 
-The missing value of a giving interval was substituted by the average of the same interval across the measured days. The following code creates a new dataset called **dadosSemNA**. It checks wether the row has a NA in the **steps** variable. If it does, the respective interval average is searched in the variable **mediaPassoTempo**.  
+The missing value of a giving interval was substituted by the average of the same interval across the measured days. The following code created a new dataset called **dadosSemNA**. It checks wether the row has a NA in the **steps** variable. If it does, the respective interval average is searched in the variable **mediaPassoTempo**.  
 
 ```{r echo=TRUE, warning=FALSE, fig.height=4}
 numMedidas <- length(dados$steps)
@@ -79,11 +79,11 @@ x <- as.Date(names(totalPassoDia))
 plot(x, y, type="h", xlab="Day", ylab="Total steps per day")
 ```
 
-After missing data replacement, the average number of steps per day is **`r round(mediaPassoDia)`**. The median is **`r round(medianaPassoDia)`**. Both values are higher than the ones obtained with the dataset with missing values.  
+After missing data replacement, the average number of steps per day was **`r round(mediaPassoDia)`**. The median was **`r round(medianaPassoDia)`**. Both values were higher than the ones obtained with the dataset with missing values.  
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-The code below creates a new column called **semana** which identifies the weekdays (level 1) and weekends (level 2). Through the function *aggregate* is calculated the mean for each group, *weekday* and *weekend*.  
+The code below created a new column called **semana** which identifies the weekdays (level 1) and weekends (level 2). Through the function *aggregate* was calculated the mean for each group, *weekday* and *weekend*.  
 
 ```{r echo=TRUE, warning=FALSE, fig.height=10}
 dadosSemNA <- transform(dadosSemNA, semana = factor(rep(1, numMedidas), levels = c(1, 2), labels = c("weekday", "weekend")))
@@ -108,4 +108,4 @@ plot(x, y2, type = "l", main = "Weekends", xlab = "Interval", ylab = "Average st
 abline(mediaY2, 0, col = "red")
 ```
 
-The results show that the activity patterns are different. During the weekdays, the individual takes more steps in a short period of time, concentrated in the begining of the day and in the end of the day. However, in the weekends, one takes less steps per period of time, but constantly along the day. So, the averages along the day are not so different. During the weekdays, the subject took an average of **`r round(mediaY1)`** steps per 5 min interval along the day. During the weekends, the average was **`r round(mediaY2)`** steps.  
+The results showed that the activity patterns were different. During the weekdays, the individual took more steps in a short period of time, concentrated in the begining of the day and in the end of the day. However, in the weekends, one took less steps per period of time, but constantly along the day. So, the averages along the day were not so different. During the weekdays, the subject took an average of **`r round(mediaY1)`** steps per 5 min interval along the day. During the weekends, the average was **`r round(mediaY2)`** steps. The total steps per day taken during the weekdays was **`r round(sum(y1))`** steps and, during the weekends, it was **`r round(sum(y2))`** steps. So, the subject walked per day more during the weekends.  
