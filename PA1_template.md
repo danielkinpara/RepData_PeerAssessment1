@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
 
 Author: Daniel Kinpara  
 Date: April, 2015  
@@ -40,7 +45,7 @@ x <- as.Date(names(totalPassoDia))
 plot(x, y, type="h", xlab="Day", ylab="Total steps per day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
 
 So, the average number of steps per day was **9354**. The median was **10395**. The missing data was excluded from the calculation.  
 
@@ -57,7 +62,7 @@ x <- names(mediaPassoTempo)
 plot(x, y, type = "l", xlab = "Interval", ylab = "Average steps per 5 min interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 
 The highest average steps occurred in the **835** interval. The missing data was excluded from the average calculation.
 
@@ -84,7 +89,7 @@ x <- as.Date(names(totalPassoDia))
 plot(x, y, type="h", xlab="Day", ylab="Total steps per day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 After missing data replacement, the average number of steps per day was **10766**. The median was **10766**. Both values were higher than the ones obtained with the dataset with missing values.  
 
@@ -116,6 +121,6 @@ plot(x, y2, type = "l", main = "Weekends", xlab = "Interval", ylab = "Average st
 abline(mediaY2, 0, col = "red")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
 The results showed that the activity patterns were different. During the weekdays, the individual took more steps in a short period of time, concentrated in the begining of the day and in the end of the day. However, in the weekends, one took less steps per period of time, but constantly along the day. So, the averages along the day were not so different. During the weekdays, the subject took an average of **36** steps per 5 min interval along the day. During the weekends, the average was **42** steps. The total steps per day taken during the weekdays was **10256** steps and, during the weekends, it was **12202** steps. So, the subject walked per day more during the weekends.  
